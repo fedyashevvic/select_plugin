@@ -8,17 +8,17 @@ const select = new Select(`#select`, {
   includeTitle: true,
   selectData: [
     {
-      img: `./select/img/bat.svg`,
+      img: `./bat.e0ea8d3d.svg`,
       title: `ABYSS`,
       text: `The Abyss`
     },
     {
-      img: `./select/img/bat.svg`,
+      img: `./bat.e0ea8d3d.svg`,
       title: `ADA`,
       text: `Cardano`
     },
     {
-      img: `./select/img/bat.svg`,
+      img: `./bat.e0ea8d3d.svg`,
       title: `ANT`,
       text: `Aragon`
     },

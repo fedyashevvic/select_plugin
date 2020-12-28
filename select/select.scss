@@ -35,7 +35,10 @@
     padding: 0px 15px;
     justify-content: start;
 
-    i {
+    .search-icon {
+      margin-right: 15px;
+    }
+    .select-arrow {
       margin-left: auto;
     }
   }

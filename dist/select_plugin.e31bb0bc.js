@@ -207,9 +207,9 @@ function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(
 
 function getTemplate(placeholder, data) {
   var itemsList = data.selectData.map(function (x) {
-    return "<div data-type=\"list-item\" class=\"select__item\">".concat(data.includeImg ? "<img data-type=\"item-img\" src=\"".concat(x.img, "\">") : "").concat(data.includeTitle ? "<span data-type=\"item-title\" class=\"title\">".concat(x.title, "</span>") : "", "<span data-type=\"item-text\" class=\"text\">").concat(x.text, "</span></div>");
+    return "<div data-type=\"list-item\" class=\"select__item\" data-url=\"\">".concat(data.includeImg ? "<img data-type=\"item-img\" src=\"".concat(x.img, "\" width=\"15px\">") : "").concat(data.includeTitle ? "<span data-type=\"item-title\" class=\"title\">".concat(x.title, "</span>") : "", "<span data-type=\"item-text\" class=\"text\">").concat(x.text, "</span></div>");
   });
-  return "\n      <div class=\"select__input\" data-type=\"input\"><img src=\"./select/img/bat.svg\"><span>".concat(placeholder !== null && placeholder !== void 0 ? placeholder : "Select currency...", "</span><i data-type=\"arrow\" class=\"fas fa-chevron-down\"></i></div>\n      <div class=\"select__item-list\">\n        ").concat(itemsList.join(""), "\n      </div>\n  ");
+  return "\n      <div class=\"select__input\" data-type=\"input\"><i class=\"far fa-search search-icon\"></i><span>".concat(placeholder !== null && placeholder !== void 0 ? placeholder : "Select currency...", "</span><i data-type=\"arrow\" class=\"fas select-arrow fa-chevron-down\"></i></div>\n      <div class=\"select__item-list\">\n        ").concat(itemsList.join(""), "\n      </div>\n  ");
 }
 
 var _renderSelect = new WeakSet();
@@ -237,12 +237,14 @@ var Select = /*#__PURE__*/function () {
     key: "clickHandler",
     value: function clickHandler(event) {
       var type = event.target.dataset.type;
+      var parentType = event.target.parentNode.dataset.type;
 
-      if (type === "input") {
+      if (type === "input" || parentType === "input") {
         this.toggleDropDown = this.toggleDropDown.bind(this);
         this.toggleDropDown();
-      } else if (type === "list-item") {
-        this.close();
+      } else if (type === "list-item" || parentType === "list-item") {
+        var $itemEl = event.target.closest("div.select__item");
+        this.toggleDropDown();
       }
     }
   }, {
@@ -296,15 +298,15 @@ var select = new _select2.Select("#select", {
   includeImg: true,
   includeTitle: true,
   selectData: [{
-    img: "./select/img/bat.svg",
+    img: "./bat.e0ea8d3d.svg",
     title: "ABYSS",
     text: "The Abyss"
   }, {
-    img: "./select/img/bat.svg",
+    img: "./bat.e0ea8d3d.svg",
     title: "ADA",
     text: "Cardano"
   }, {
-    img: "./select/img/bat.svg",
+    img: "./bat.e0ea8d3d.svg",
     title: "ANT",
     text: "Aragon"
   }]
@@ -337,7 +339,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54555" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59677" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -31,7 +31,10 @@
   padding: 0px 15px;
   justify-content: start;
 }
-.wrap .select__input i {
+.wrap .select__input .search-icon {
+  margin-right: 15px;
+}
+.wrap .select__input .select-arrow {
   margin-left: auto;
 }
 .wrap .select__item-list {
