@@ -37,6 +37,12 @@
 .wrap .select__input .select-arrow {
   margin-left: auto;
 }
+.wrap .select__input .select__active-title {
+  color: #FFB03A;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+}
 .wrap .select__item-list {
   display: none;
   width: 100%;

@@ -10,17 +10,20 @@ const select = new Select(`#select`, {
     {
       img: `./bat.e0ea8d3d.svg`,
       title: `ABYSS`,
-      text: `The Abyss`
+      text: `The Abyss`,
+      id: 1
     },
     {
       img: `./bat.e0ea8d3d.svg`,
       title: `ADA`,
-      text: `Cardano`
+      text: `Cardano`,
+      id: 2
     },
     {
       img: `./bat.e0ea8d3d.svg`,
       title: `ANT`,
-      text: `Aragon`
+      text: `Aragon`,
+      id: 3
     },
   ],
 });

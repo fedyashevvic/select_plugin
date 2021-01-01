@@ -207,7 +207,7 @@ function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(
 
 function getTemplate(placeholder, data) {
   var itemsList = data.selectData.map(function (x) {
-    return "<div data-type=\"list-item\" class=\"select__item\" data-url=\"\">".concat(data.includeImg ? "<img data-type=\"item-img\" src=\"".concat(x.img, "\" width=\"15px\">") : "").concat(data.includeTitle ? "<span data-type=\"item-title\" class=\"title\">".concat(x.title, "</span>") : "", "<span data-type=\"item-text\" class=\"text\">").concat(x.text, "</span></div>");
+    return "<div class=\"select__item\" data-type=\"list-item\" data-id=\"".concat(x.id, "\">").concat(data.includeImg ? "<img data-type=\"item-img\" src=\"".concat(x.img, "\" width=\"15px\">") : "").concat(data.includeTitle ? "<span data-type=\"item-title\" class=\"title\">".concat(x.title, "</span>") : "", "<span data-type=\"item-text\" class=\"text\">").concat(x.text, "</span></div>");
   });
   return "\n      <div class=\"select__input\" data-type=\"input\"><i class=\"far fa-search search-icon\"></i><span>".concat(placeholder !== null && placeholder !== void 0 ? placeholder : "Select currency...", "</span><i data-type=\"arrow\" class=\"fas select-arrow fa-chevron-down\"></i></div>\n      <div class=\"select__item-list\">\n        ").concat(itemsList.join(""), "\n      </div>\n  ");
 }
@@ -234,6 +234,11 @@ var Select = /*#__PURE__*/function () {
   }
 
   _createClass(Select, [{
+    key: "getInputHtml",
+    value: function getInputHtml(data) {
+      return "<img src=\"".concat(data.img, "\" width=\"25px\"><span class=\"select__active-title\">").concat(data.title, "</span><i data-type=\"close\" class=\"select-arrow far fa-times\"></i>");
+    }
+  }, {
     key: "clickHandler",
     value: function clickHandler(event) {
       var type = event.target.dataset.type;
@@ -244,28 +249,41 @@ var Select = /*#__PURE__*/function () {
         this.toggleDropDown();
       } else if (type === "list-item" || parentType === "list-item") {
         var $itemEl = event.target.closest("div.select__item");
+        this.selectedItem = $itemEl.dataset.id;
+        this.$input.innerHTML = this.getInputHtml(this.currentItem);
         this.toggleDropDown();
+      } else if (type === "close" || parentType === "close") {
+        this.selectedItem = null;
       }
     }
   }, {
     key: "open",
     value: function open() {
       this.selectorElement.classList.add("opened");
-      this.arrow.classList.remove("fa-chevron-down");
-      this.arrow.classList.add("fa-times");
+      this.$arrow.classList.remove("fa-chevron-down");
+      this.$arrow.classList.add("fa-times");
     }
   }, {
     key: "close",
     value: function close() {
       this.selectorElement.classList.remove("opened");
-      this.arrow.classList.remove("fa-times");
-      this.arrow.classList.add("fa-chevron-down");
+      this.$arrow.classList.remove("fa-times");
+      this.$arrow.classList.add("fa-chevron-down");
     }
   }, {
     key: "toggleDropDown",
     value: function toggleDropDown() {
       this._isOpened ? this.close() : this.open();
       this._isOpened = !this._isOpened;
+    }
+  }, {
+    key: "currentItem",
+    get: function get() {
+      var _this = this;
+
+      return this.configData.selectData.find(function (x) {
+        return x.id === +_this.selectedItem;
+      });
     }
   }]);
 
@@ -283,7 +301,8 @@ var _renderSelect2 = function _renderSelect2() {
 var _setup2 = function _setup2() {
   this.clickHandler = this.clickHandler.bind(this);
   this.selectorElement.addEventListener("click", this.clickHandler);
-  this.arrow = this.selectorElement.querySelector("[data-type=\"arrow\"]");
+  this.$arrow = this.selectorElement.querySelector("[data-type=\"arrow\"]");
+  this.$input = this.selectorElement.querySelector("[data-type=\"input\"]");
 };
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
@@ -300,15 +319,18 @@ var select = new _select2.Select("#select", {
   selectData: [{
     img: "./bat.e0ea8d3d.svg",
     title: "ABYSS",
-    text: "The Abyss"
+    text: "The Abyss",
+    id: 1
   }, {
     img: "./bat.e0ea8d3d.svg",
     title: "ADA",
-    text: "Cardano"
+    text: "Cardano",
+    id: 2
   }, {
     img: "./bat.e0ea8d3d.svg",
     title: "ANT",
-    text: "Aragon"
+    text: "Aragon",
+    id: 3
   }]
 });
 },{"./select/select.scss":"select/select.scss","./select/select.js":"select/select.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -339,7 +361,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59677" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52190" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
